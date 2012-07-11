@@ -10,6 +10,8 @@ class Post(models.Model):
 	updated = models.DateField(auto_now=True)
 	def __unicode__(self):
 		return self.title
+	def body_first_60(self):
+		return self.body[:60]
 
 class Comment(models.Model):
 	body = models.TextField()

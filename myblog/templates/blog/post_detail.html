@@ -1,0 +1,18 @@
+{% extends "blog/base.html"%}
+
+{% block content %}
+	<h3>{{ posts.title }}</h3> <br/>
+	Created : {{ posts.created }} &nbsp&nbsp
+	Last Updated : {{ posts.updated }}<br/>
+	<p>{{ posts.body }}</p>
+	<h5>COMMENTS</h5><hr/><br/>
+
+	{% for c in comments %}
+		Author : {{ c.author }} <br/>
+		Created : {{ c.created }} &nbsp&nbsp
+		Last Updated : {{ c.updated }} <br/>
+		<p>{{c.body}}</p>
+	{% endfor %}
+
+
+{% endblock %}

@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
-	<head> <title>GALORE BLOG</title>
+	<head> 
+		<title>GALORE BLOG</title>
+		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
+
 	</head>
 
-	<body>
-		
+	<body>	
 
-		<div id = "content">
+    <div class="container-fluid">
+    	<div class="row-fluid">
+    		<div class="span2">
+    <!--Sidebar content-->
+    		</div>
+    	<div id = "content" class="span10">
+	
+		    <form  class="well form-search">
+			    <input type="text" class="input-medium search-query">
+			    <button type="submit" class="btn btn-primary"><i class="icon-search"></i> Search</button>
+			
+		    </form>
 		{% block content %}
 		<a href="/blog/posts">CLICK ME TO GET LINK OF ALL POSTS</a>
 
 		{% endblock %}	
-		</div>
+			
+    <!--Body content-->
+    		</div>
+    	</div>
+    </div>
+
+
 	<body>
 </html>

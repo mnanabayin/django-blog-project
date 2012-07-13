@@ -12,6 +12,9 @@ class Post(models.Model):
 		return self.title
 	def body_first_60(self):
 		return self.body[:60]
+	def get_absolute_url(self):
+		return "/blog/posts/%i/true" % self.id
+
 
 class Comment(models.Model):
 	body = models.TextField()

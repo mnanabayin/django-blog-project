@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<h5>Edit comment:</h5>
+	<div>
+	<form class="well form-inline" method='POST' action="">
+		{{ form.as_p }}
+		<input class="btn btn-primary" type='submit' name='Submit' value="Edit Comment">
+	</form>
+	</div>
+
+
+{% endblock %}

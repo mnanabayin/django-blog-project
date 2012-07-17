@@ -18,12 +18,10 @@ from models import Post, Comment
 
 
 def post_list(request):
-	sess_comm = False
-	if "uname_sess" in request.session:
-		sess_comm = True
+	
 	posts = Post.objects.all()
 	t = loader.get_template('blog/post_list.html')
-	c = Context({'posts':posts,'sess_comm':sess_comm,'user': request.user})
+	c = Context({'posts':posts,'user': request.user})
 	return HttpResponse(t.render(c))
        
 
@@ -38,10 +36,9 @@ class CommentForm(ModelForm):
 
 @csrf_exempt
 def post_detail(request, id, showComments=False):
-	sess_comm = False
+	
 	posts = Post.objects.get(pk=id)
-	if "uname_sess" in request.session:
-		sess_comm = True
+	
 	if request.method == 'POST':
 		comment = Comment(post=posts,author=request.session["uname_sess"])
 		#Comment.author = request.session["uname_sess"]
@@ -55,7 +52,6 @@ def post_detail(request, id, showComments=False):
 	comments = posts.comments.all()
 	return render_to_response('blog/post_detail.html',{
 					'posts':posts,
-					'sess_comm':sess_comm,
 					'comments':comments,
 					'form':form,
 					'user': request.user})
@@ -65,12 +61,11 @@ def post_detail(request, id, showComments=False):
 	
 @csrf_exempt	
 def edit_comment(request,id):
-	sess_comm = False
-	if "uname_sess" in request.session:
-		sess_comm = True
 	comment = Comment.objects.get(pk=id)
-	if comment.author != request.session["uname_sess"]:
-		return HttpResponseForbidden("You do not have permission to edit this comment<br/><a href='/blog/posts'>BLOGS</a>")
+	if request.user.username == '':
+		return HttpResponseForbidden("You are logged out.<br/><a href='/reg/login'>CLICK TO LOGIN</a>")
+	elif comment.author != request.user.username:
+		return HttpResponseForbidden("You do not have permission to edit this comment<br/><a href='/blog/posts'>CLICK TO GET BLOGS</a>")
 	if request.method == 'POST':
 		form = CommentForm(request.POST, instance=comment)
 		if form.is_valid():
@@ -79,25 +74,19 @@ def edit_comment(request,id):
 	else:
 		form = CommentForm(instance=comment)
 		
-	return render_to_response('blog/edit_comment.html',{'comment':comment,'form':form,'sess_comm':sess_comm,'user': request.user})
+	return render_to_response('blog/edit_comment.html',{'comment':comment,'form':form,'user': request.user})
 
 	
 	
 
 	
-    
+#search    
 def post_search(request, term):
-	sess_comm = False
-	if "uname_sess" in request.session:
-		sess_comm = True
 	if request.GET.get('search_item','') != '':
 		term = request.GET.get('search_item','')
 	posts = Post.objects.filter(title__icontains=term) | Post.objects.filter(body__icontains=term)
-	return render_to_response('blog/post_search.html',{'posts':posts,'term':term,'sess_comm':sess_comm,'user': request.user})
+	return render_to_response('blog/post_search.html',{'posts':posts,'term':term,'user': request.user})
         
 	
 def home(request):
-	sess_comm = False
-	if "uname_sess" in request.session:
-		sess_comm = True
-	return render_to_response('blog/base.html',{'sess_comm':sess_comm,'user': request.user})
+	return render_to_response('blog/base.html',{'user': request.user})

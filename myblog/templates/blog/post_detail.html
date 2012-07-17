@@ -35,7 +35,7 @@
 	{% endfor %}
 	{% endifequal %}
 	<br/>
-	{% if sess_comm %}
+	{% ifnotequal user.username '' %}
 		<h4>NEW COMMENT:</h4>
 		<div>
 			<form  method='post' action="">
@@ -43,7 +43,7 @@
 				<input class="btn btn-primary" type='submit' name='Submit' value='Comment'>
 			</form>
 		</div>
-	{% endif %}
+	{% endifnotequal %}
 
 
 

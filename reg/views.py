@@ -18,13 +18,11 @@ class LoginForm(forms.Form):
 
 @csrf_exempt
 def do_login(request):
-	sess_comm = False
-	if "uname_sess" in request.session:
-		sess_comm = True
+	
 	disabled_accMsg = ''
 	invalidMsg = ''
 	sess_data = ''
-	if "uname_sess" in request.session:
+	if request.user.username != '':
 		sess_data = 'You are already logged in.'
 
 	if request.method == 'POST':
@@ -57,7 +55,6 @@ def do_login(request):
 	'disabled_accMsg': disabled_accMsg,
 	'invalidMsg': invalidMsg,
 	'sess_data': sess_data,
-	'sess_comm': sess_comm,
 	'user': request.user
     })
 
@@ -66,9 +63,9 @@ def do_login(request):
 
 @csrf_exempt
 def do_logout(request):
-	if "uname_sess" in request.session:
-		del request.session["uname_sess"]
+	if request.user.username != '':
 		logout(request)
+		request.user.username = ''
 		return render_to_response('reg/do_logout.html',{'l_out':True,'user': request.user})
 	else:
 		return HttpResponseRedirect("/reg/login")

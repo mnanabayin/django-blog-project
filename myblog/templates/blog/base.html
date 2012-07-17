@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head> 
-		<title>GALORE BLOG</title>
+		<title>BLOG GALORE</title>
 		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
 	</head>
 
@@ -11,7 +11,7 @@
     		<div class="row-fluid">
     			
     			<div id = "content" class="span10">
-				<div class="well" position:relative;">
+				<div class="well" >
 					
 					    
 					<b style="color:black; font-size:30px; margin-left:300px; margin-bottom:0px;">BLOG GALORE</b>
@@ -25,15 +25,15 @@
      					   
 						
      					   <li>
-						{% if sess_comm %}
+						{% ifnotequal user.username '' %}
 							<a href="/reg/logout">Logout</a>
 						{% else %}
 							<a href="/reg/login">Login</a>
-						{% endif %}
+						{% endifnotequal %}
 					   </li>
 						
      					 
-					<form class="navbar-search pull-right" method="GET" action="/blog/posts/search/">
+						<form class="navbar-search pull-right" method="GET" action="/blog/posts/search/">
 						   <i class="icon-search"></i>
 						 <input type="text" class="search-query" placeholder="Search" name="search_item" >
     					    </form>
@@ -47,10 +47,11 @@
 							<a href="/blog/posts">Blogs</a> <span class="divider">/</span>
 						    </li>
 						    <li class="active">Data</li>
-							<li><b style="margin-left:100px;">{{user.username}}</b>
+							{% ifnotequal user.username '' %}
+							<li><b style="margin-left:350px;"><i class="icon-user"></i>{{user.username}}</b>
 											
 							</li>
-								
+							{% endifnotequal %}	
 						    </ul> 
 		
 			
@@ -75,8 +76,10 @@
 <li>
 <a href="/blog/posts">Blogs</a> <span class="divider">/</span></li>
 <li class="active">Data</li>
-<b style="margin-left:350px;">{{user.username}}</b>	
-Copyright © 2012 , GaloreSoft Systems
+{% ifnotequal user.username '' %}
+<li><b style="margin-left:350px;"><i class="icon-user"></i>{{user.username}}</b></li>
+{% endifnotequal %}	
+&nbsp Copyright © 2012 , GaloreSoft Systems
 </ul> </div>
     		</div>
 		

@@ -1,7 +1,11 @@
 {% extends "blog/base.html"%}
 
 {% block content %}
+<h3>SEARCH RESULTS ({{posts.count}}) Found</h3><hr/>
 {% for s in posts %}
+<blockquote>
 	<a href="/blog/posts/{{ s.id }}/True"><h3>{{ s }}</h3></a><br/>
+	{{s.body_first_60}}<a href="/blog/posts/{{s.id}}/True" color='blue'>...Read more...</a><hr/>
+</blockquote>
 {% endfor %}
 {% endblock %}

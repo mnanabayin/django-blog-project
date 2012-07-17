@@ -5,13 +5,11 @@
 	<h3>
 		<a href="/blog/posts/{{ p.id }}/True">{{ p.title }}</a>
 	</h3>
-	
-	<ul class="unstyled">
-		<li>Created: {{ p.created }}</li>
-		<li>Last Updated: {{ p.updated }}</li>
-		<li>{{ p.body_first_60 }}<a href="/blog/posts/{{p.id}}/True" color='blue'>...Read more...</a></li>
-	</ul>
-	
+	<blockquote>
+		<small>Created: {{ p.created }}&nbsp&nbsp
+			Last Updated: {{ p.updated }}</small>
+		<p>{{ p.body_first_60 }}</p><a href="/blog/posts/{{p.id}}/True" color='blue'>...Read more...</a><hr/>
+	</blockquote>
 
 {% endfor %}
 

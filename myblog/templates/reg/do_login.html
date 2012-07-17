@@ -1,0 +1,46 @@
+<!--
+the template for your login page
+This should be places in the templates/reg
+folder. Name it what you will, but make sure
+that the view function has the correct path
+
+Also, remember that for this template
+the lab has you make some changes
+-->
+
+
+
+{% extends "blog/base.html" %}
+
+{% block content %}
+{% ifnotequal sess_data '' %}
+<div class="alert alert-info">
+	<a class="close" data-dismiss="alert" href="/reg/logout">Logout</a>
+	<h4 class="alert-heading">Notice</h4>
+	{{ sess_data }}
+</div>
+{% else %}
+
+{% ifnotequal invalidMsg '' %}
+<div class="alert alert-error">
+	<h4 class="alert-heading">Login Failure!</h4>
+	{{ invalidMsg }}
+</div>
+{% endifnotequal %}
+
+{% ifnotequal disabled_accMsg ''%}
+<div class="alert alert-error">
+	<h4 class="alert-heading">Notice!!</h4>
+{{ disabled_accMsg }}
+{% endifnotequal%}
+
+<form action="." method="post">
+<fieldset>
+<legend>LOGIN</legend>
+	{{ form.as_p }}
+
+</fieldset>
+     <input class="btn btn-primary" type="submit" name="Submit" value="Login" />
+</form>
+{% endifnotequal %}
+{% endblock %}

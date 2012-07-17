@@ -1,32 +1,49 @@
 {% extends "blog/base.html"%}
 
 {% block content %}
-	<h3>{{ posts.title }}</h3> <br/>
-	Created : {{ posts.created }} &nbsp&nbsp
-	Last Updated : {{ posts.updated }}<br/><br/>
-	<p>{{ posts.body }}</p>
-	<h5>COMMENTS</h5><hr/>
+	<blockquote>
+	<h2>{{ posts.title }}</h2> <br/>
+	<small>Created : {{ posts.created }} &nbsp&nbsp
+	Last Updated : {{ posts.updated }}</small><br/><br/>
+	<p>{{ posts.body }}</p></blockquote>
+	<h4>COMMENTS</h4><hr/>
+	
+	{% ifequal comments.count 0 %}
+	<p> There are no comment(s) for this post.</p>
 
+	{% else %}		
+	<em> {{comments.count}}  Comments made.</em><hr/>
 	{% for c in comments %}
-		Author : {{ c.author }} <br/>
+		
+		
+		<blockquote>
+		<p style="font-size:14px;">{{c.body}}</p>
+		<small>Author : {{ c.author }} <br/>
 		Created : {{ c.created }} &nbsp&nbsp
-		Last Updated : {{ c.updated }} <br/><br/>
-		<p>{{c.body}}</p>
-		<div>
+		Last Updated : {{ c.updated }} &nbsp&nbsp
+		
+		{% ifequal c.author  user.username %}
+		
 			<a href="/blog/comments/{{ c.id }}/edit">
+			<i class="icon-edit"></i>
 			Edit Comment
 			</a>
-		</div><hr/>
+		
+		{% endifequal %}
+		</small><hr/>
+	</blockquote>
 	{% endfor %}
+	{% endifequal %}
 	<br/>
-
-	<h5>New comment:</h5>
-	<div>
-	<form class="well form-inline" method='post' action="">
-		{{ form.as_p }}
-		<input class="btn btn-primary" type='submit' name='Submit' value='Submit'>
-	</form>
-	</div>
+	{% if sess_comm %}
+		<h4>NEW COMMENT:</h4>
+		<div>
+			<form  method='post' action="">
+				{{ form.as_p }}
+				<input class="btn btn-primary" type='submit' name='Submit' value='Comment'>
+			</form>
+		</div>
+	{% endif %}
 
 
 

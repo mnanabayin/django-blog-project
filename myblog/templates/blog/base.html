@@ -1,35 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head> 
 		<title>GALORE BLOG</title>
 		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
-
 	</head>
 
-	<body>	
+	<body style="">	
 
-    <div class="container-fluid">
-    	<div class="row-fluid">
-    		<div class="span2">
-    <!--Sidebar content-->
-    		</div>
-    	<div id = "content" class="span10">
+   	 <div class="container-fluid">
+    		<div class="row-fluid">
+    			
+    			<div id = "content" class="span10">
+				<div class="well" position:relative;">
+					
+					    
+					<b style="color:black; font-size:30px; margin-left:300px; margin-bottom:0px;">BLOG GALORE</b>
+				</div>
 	
-		    <form  class="well form-search">
-			    <input type="text" class="input-medium search-query">
-			    <button type="submit" class="btn btn-primary"><i class="icon-search"></i> Search</button>
+		  			 <div class="dvlamenu" style="position:relative;">
+     					 <ul>
+     					   <li><a href="/blog">HOME</a></li>
+     					   <li><a href="/blog/posts">BLOGS</a></li>
+     					   
+     					   
+						
+     					   <li>
+						{% if sess_comm %}
+							<a href="/reg/logout">Logout</a>
+						{% else %}
+							<a href="/reg/login">Login</a>
+						{% endif %}
+					   </li>
+						
+     					 
+					<form class="navbar-search pull-right" method="GET" action="/blog/posts/search/">
+						   <i class="icon-search"></i>
+						 <input type="text" class="search-query" placeholder="Search" name="search_item" >
+    					    </form>
+					</ul>		
+    					</div>
+					    <ul class="breadcrumb">
+    						<li>
+  						  <a href="/blog">Home</a> <span class="divider">/</span>
+  						  </li>
+  						  <li>
+							<a href="/blog/posts">Blogs</a> <span class="divider">/</span>
+						    </li>
+						    <li class="active">Data</li>
+							<li><b style="margin-left:100px;">{{user.username}}</b>
+											
+							</li>
+								
+						    </ul> 
+		
 			
-		    </form>
 		{% block content %}
-		<a href="/blog/posts">CLICK ME TO GET LINK OF ALL POSTS</a>
+			    <div class="hero-unit">
+				    <h1>Hello Blogger!</h1>
+				    <p>Welcome</p>
+				    <p>Please do <a href="/reg/login">login</a> to be able to comment on a post and to edit your comment as long as you are logged in. Thank you</p>
+					    <a href="/blog/posts" class="btn btn-primary btn-large"> See my blogs </a>
+				    </p>
+    			   </div>
+		
+		
 
 		{% endblock %}	
 			
     <!--Body content-->
+<div style="position:relative; bottom:0px;">
+<ul class="breadcrumb">
+<li>
+  <a href="/blog">Home</a> <span class="divider">/</span> </li>
+<li>
+<a href="/blog/posts">Blogs</a> <span class="divider">/</span></li>
+<li class="active">Data</li>
+<b style="margin-left:350px;">{{user.username}}</b>	
+Copyright © 2012 , GaloreSoft Systems
+</ul> </div>
     		</div>
+		
     	</div>
+	
     </div>
 
 
-	<body>
+
+ 
+	</body>
 </html>

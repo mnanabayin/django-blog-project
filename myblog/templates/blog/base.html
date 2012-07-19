@@ -14,7 +14,7 @@
 				<div class="well" >
 					
 					    
-					<b style="color:black; font-size:30px; margin-left:300px; margin-bottom:0px;">BLOG GALORE</b>
+					<b style="color:black; font-size:35px; margin-left:300px; margin-bottom:0px;">BLOG GALORE</b>
 				</div>
 	
 		  			 <div class="dvlamenu" style="position:relative;">
@@ -35,7 +35,7 @@
      					 
 						<form class="navbar-search pull-right" method="GET" action="/blog/posts/search/">
 						   <i class="icon-search"></i>
-						 <input type="text" class="search-query" placeholder="Search" name="search_item" >
+					<input type="text" style="border: 1px solid blue;" class="form-search" placeholder="Search"name="search_item" >
     					    </form>
 					</ul>		
     					</div>
@@ -56,10 +56,10 @@
 		
 			
 		{% block content %}
-			    <div class="hero-unit">
+			    <div style="position:relative;" class="hero-unit">
 				    <h1>Hello Blogger!</h1>
 				    <p>Welcome</p>
-				    <p>Please do <a href="/reg/login">login</a> to be able to comment on a post and to edit your comment as long as you are logged in. Thank you</p>
+				    <p style="text-align:justify;">Please do <a href="/reg/login">login</a> to be able to comment on a post and to edit your comment as long as you are logged in. Thank you</p>
 					    <a href="/blog/posts" class="btn btn-primary btn-large"> See my blogs </a>
 				    </p>
     			   </div>

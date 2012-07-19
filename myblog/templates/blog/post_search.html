@@ -4,8 +4,10 @@
 <h3>SEARCH RESULTS ({{posts.count}}) Found</h3><hr/>
 {% for s in posts %}
 <blockquote>
-	<a href="/blog/posts/{{ s.id }}/True"><h3>{{ s }}</h3></a><br/>
-	{{s.body_first_60}}<a href="/blog/posts/{{s.id}}/True" color='blue'>...Read more...</a><hr/>
+	<a href="/blog/posts/{{ s.id }}/True"><h3 style="text-align:justify;" >{{ s }}</h3></a><br/>
+	<p style="font-size:14px; text-align:justify;">{{s.body_first_60}}<a href="/blog/posts/{{s.id}}/True" color='blue'>...Read more...</a></p>
+	<a href="/blog/posts/{{ s.id }}/True"><i class="icon-comment"></i>&nbsp<em>{{s.comments.count}} Comment(s)</em></a>
+	<hr/>
 </blockquote>
 {% endfor %}
 {% endblock %}
